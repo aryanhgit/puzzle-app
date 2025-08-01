@@ -12,7 +12,7 @@ signup_model = auth_ns.model(
     {
         "username": fields.String(required=True),
         "email": fields.String(required=True),
-        "password_hash": fields.String(required=True),
+        "password": fields.String(required=True),
     }
 )
 
@@ -42,7 +42,7 @@ class SignUp(Resource):
         new_user = User(
             username=data['username'],
             email=data['email'],
-            password_hash=generate_password_hash(data['password_hash']) 
+            password=generate_password_hash(data['password']) 
         )
         new_user.save()
 
@@ -60,7 +60,7 @@ class Login(Resource):
 
         db_user = User.query.filter_by(username=username).first()
 
-        if db_user and check_password_hash(db_user.password_hash, password):
+        if db_user and check_password_hash(db_user.password, password):
             access_token = create_access_token(identity=db_user.username)
             refresh_token = create_refresh_token(identity=db_user.username)
 

@@ -22,7 +22,7 @@ class FlaskAppTestCase(unittest.TestCase):
         response = self.client.post('/auth/signup', json={
             'username': 'testuser',
             'email': 'johndoe@example.com',
-            'password_hash': 'testpassword'
+            'password': 'testpassword'
         })
         self.assertEqual(response.status_code, 201)
     
@@ -47,7 +47,7 @@ class FlaskAppTestCase(unittest.TestCase):
         response = self.client.post('/auth/signup', json={
             'username': 'testuser',
             'email': 'johndoe@example.com',
-            'password_hash': 'testpassword'
+            'password': 'testpassword'
         })
 
         response = self.client.post('/auth/login', json={
@@ -71,7 +71,7 @@ class FlaskAppTestCase(unittest.TestCase):
         response = self.client.post('/auth/signup', json={
             'username': 'testuser',
             'email': 'johndoe@example.com',
-            'password_hash': 'testpassword'
+            'password': 'testpassword'
         })
 
         response = self.client.post('/auth/login', json={
@@ -99,7 +99,7 @@ class FlaskAppTestCase(unittest.TestCase):
         response = self.client.post('/auth/signup', json={
             'username': 'testuser',
             'email': 'johndoe@example.com',
-            'password_hash': 'testpassword'
+            'password': 'testpassword'
         })
 
         response = self.client.post('/auth/login', json={
