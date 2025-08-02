@@ -22,9 +22,7 @@ const LoginPage = () => {
         // })
         // .catch((error) => {
         //     console.error('Error:', error);
-        //     // Handle errors, e.g., display an error message
-        // });
-
+        //     // Handle errors, e.g., display an error message     
     };
 
     return (
@@ -47,7 +45,7 @@ const LoginPage = () => {
                     />
                     {errors.password && <p className="text-danger">Password is required and must be at least 6 characters.</p>}
                 </div>
-                
+
                 <div className="form-group form-check">
                     <input type="checkbox" className="form-check-input" id="exampleCheck1"
                         {...register("rememberMe")}
@@ -56,11 +54,11 @@ const LoginPage = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            
+
             <p className="mt-3">
                 Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
-            
+
         </div>
     );
 }

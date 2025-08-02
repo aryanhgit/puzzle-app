@@ -5,25 +5,31 @@ import { Link } from 'react-router';
 const SignUpPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const [error, setError] = React.useState(null);
+
     const onSubmit = (data) => {
         console.log(data);
+        if (data.password !== data.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
         // send the data to your backend API
-        // fetch('http://localhost:5000/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data),
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log('Success:', data);
-        //     // Handle success, e.g., redirect to login page
-        // })
-        // .catch((error) => {
-        //     console.error('Error:', error);
-        //     // Handle errors, e.g., display an error message
-        // });
+        fetch('/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success, e.g., redirect to login page
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle errors, e.g., display an error message
+            });
 
     };
 
@@ -40,7 +46,7 @@ const SignUpPage = () => {
                     />
                     {errors.username && <p className="text-danger">Username is required and must be at least 3 characters.</p>}
                 </div>
-                
+
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
@@ -57,7 +63,7 @@ const SignUpPage = () => {
                     />
                     {errors.password && <p className="text-danger">Password is required and must be at least 6 characters.</p>}
                 </div>
-                
+
                 <div className="form-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm Password"
@@ -80,7 +86,7 @@ const SignUpPage = () => {
             </p>
 
         </div>
-    );  
+    );
 }
 
 export default SignUpPage;
